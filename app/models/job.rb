@@ -13,7 +13,8 @@ class Job < ApplicationRecord
   validates :description, :job_location, :job_type, 
             :applicable_for, :salary_range, :total_positions, presence: true
 
-  validates :status, presence: true, inclusion: { in: JOB_STATUS, message: "%{value} is not a valid status" }
+  validates :status, presence: true 
+  # inclusion: { in: JOB_STATUS, message: "%{value} is not a valid status" }
 
   scope :remote_jobs, -> { where(job_location: 'Remote') }
   scope :onsite_jobs, -> { where(job_location: 'Onsite') }

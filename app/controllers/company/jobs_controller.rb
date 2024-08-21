@@ -14,12 +14,12 @@ class Company::JobsController < ApplicationController
     if @job.save
       redirect_to company_jobs_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @job = current_company.jobs.find(params[:id])
+    @job = current_company.jobs.find_by(uuid: params[:id])
   end
 
   private

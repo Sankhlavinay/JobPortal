@@ -26,6 +26,8 @@
             </div>
             <div class="col-lg-6">
               <%= link_to 'View job', company_job_path(job), class: 'btn btn-primary mt-3' %>
+              <%= link_to 'Edit job', edit_company_job_path(job), class: 'btn btn-outline-primary mt-3' %>
+              <%= link_to 'Delete Job', company_job_path(job), class: 'btn btn-danger mt-3', method: :delete, data: { confirm: "Are You sure to delete this Job" } %>
             </div>
           </div>
         </div>

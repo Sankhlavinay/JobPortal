@@ -1,7 +1,7 @@
 class Job < ApplicationRecord
 
   JOB_TYPE = ['Contract', 'Fulltime', 'Part time', 'Internship'].freeze
-  JOB_LOCATION = ['Remote', 'Onsite']
+  JOB_LOCATION = ['Remote', 'Onsite', "Hybrid"]
   APPLICABLE_FOR = ['Freshers', 'Intermediate', 'Experienced', 'Expert', 'Open for all']
   SALARY_RANGE = ['$1000-$2500', '$2500-$5000', '$5000-$10000', '> $10000', 'Hourly']
   JOB_STATUS = ['Active', 'Inactive', 'Draft']

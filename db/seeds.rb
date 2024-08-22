@@ -44,6 +44,7 @@ User.where(role: 'employeer').each_with_index do |employeer, i|
     applicable_for: ['Freshers', 'Intermediate', 'Experienced', 'Expert', 'Open for all'].sample,
     salary_range: ['$1000-$2500', '$2500-$5000', '$5000-$10000', '> $10000', 'Hourly'].sample,
     link_to_apply: "https://#{employeer.company.name.downcase.gsub(' ', '')}.org/careers/",
-    total_positions: rand(1..5)
+    total_positions: rand(1..5),
+    status: 'Active'
   )
 end

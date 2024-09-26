@@ -1,10 +1,10 @@
 class JobsController < ApplicationController
   def index
     if params[:type].present?
-      @q = Job.includes(:company).send("#{params[:type]}_jobs").active_jobs.ransack(params[:q])
+      @q = Job.active_jobs.send("#{params[:type]}_jobs").ransack(params[:q])
       @jobs = @q.result
     else
-      @q = Job.includes(:company).active_jobs.ransack(params[:q])
+      @q = Job.active_jobs.ransack(params[:q])
       @jobs = @q.result
     end
   end

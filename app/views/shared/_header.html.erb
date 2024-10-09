@@ -34,13 +34,19 @@
     </div>
   </div>
 
-  <div>
-    <%= link_to "Create Post", new_company_job_path, class: "btn btn-info text-nowrap" %>
-  </div>
-  <div>
-    <%= link_to "View Jobs", company_jobs_path, class: "btn btn-info text-nowrap" %>
-  </div>
-  <div>
-    <%= link_to "All Jobs", jobs_path, class: "btn btn-info text-nowrap" %>
-  </div>
+  <% if user_signed_in? && current_user.employeer? %>
+    <div>
+      <%= link_to "Create Post", new_company_job_path, class: "btn btn-info text-nowrap" %>
+    </div>
+    <div>
+      <%= link_to "View Jobs", company_jobs_path, class: "btn btn-info text-nowrap" %>
+    </div>
+    <div>
+      <%= link_to "All Jobs", jobs_path, class: "btn btn-info text-nowrap" %>
+    </div>
+  <% else%>
+    <div>
+      <%= link_to "All Jobs", jobs_path, class: "btn btn-info text-nowrap" %>
+    </div>
+  <% end %>
 </nav>

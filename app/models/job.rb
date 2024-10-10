@@ -8,6 +8,9 @@ class Job < ApplicationRecord
 
   has_many :applied_jobs
   belongs_to :company
+
+  has_many :user_saved_jobs
+  has_many :users, through: :user_saved_jobs
   
   validates :title, presence: true, uniqueness: true
   validates :description, :job_location, :job_type, 

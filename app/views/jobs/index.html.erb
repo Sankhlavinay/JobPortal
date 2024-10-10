@@ -1,3 +1,9 @@
+<% if @jobs.present? %>
+  <h1 class="text-center mb-4 mt-2">Hey! We got total <%= pluralize(@jobs.count, "#{(params[:type] || '').titleize} Job") %> For You</h1>
+<% else %>
+  <h1 class="text-center">Sorry! No <%= "#{(params[:type] || '').titleize} Jobs" %> at the moment</h1>
+<% end %>
+
 <div class="mt-3 mb-3">
   <div class="card shadow">
     <h1 class="text-center mb-2 mt-2">Search Job</h1>
@@ -26,41 +32,45 @@
   </div>
 </div>
 
-<% if @jobs.present? %>
-  <h1 class="text-center">Hey! We got total <%= pluralize(@jobs.count, "#{(params[:type] || '').titleize} Job") %> For You</h1>
-  <div class="row mt-3">
-    <div class="col-lg-12 mx-auto ">
-      <% @jobs.each do |job| %>
-        <div class="card shadow mb-3">
-          <div class="card-body">
-            <p class="lead fw-bold text-primary"><%= job.title %></p>
-            <div class="row">
-              <div class="col-lg-3">
-                <p class="fw-bold text-secondary my-1">Applicable for</p>
-                <small class=""><%= job.applicable_for %></small>
-              </div>
-              <div class="col-lg-3">
-                <p class="fw-bold text-secondary my-1">Salary Range</p>
-                <small class=""><%= job.salary_range %></small>
-              </div>
-              <div class="col-lg-3">
-                <p class="fw-bold text-secondary my-1">Total Positions</p>
-                <small class=""><%= job.total_positions %></small>
-              </div>
-              <div class="col-lg-3">
-                <p class="fw-bold text-secondary my-1">Company</p>
-                <small class=""><%= link_to job.company.name, job.company %></small>
-              </div>
-              <div class="col-lg-6">
-                <%= link_to 'Apply to this job', new_applied_job_path(job_id: job.uuid), class: 'btn btn-primary' %>
-                <%= link_to 'View job', job, class: 'btn btn-primary' %>
-              </div>
+
+<div class="row mt-3">
+  <div class="col-lg-12 mx-auto ">
+    <% @jobs.each do |job| %>
+      <div class="card shadow mb-3">
+        <div class="card-body">
+          <p class="lead fw-bold text-primary"><%= job.title %></p>
+          <div class="row">
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Applicable for</p>
+              <small class=""><%= job.applicable_for %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Salary Range</p>
+              <small class=""><%= job.salary_range %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Total Positions</p>
+              <small class=""><%= job.total_positions %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Company</p>
+              <small class=""><%= link_to job.company.name, job.company %></small>
+            </div>
+            <div class="col-lg-6 mt-2">
+              <%= link_to 'Apply to this job', new_applied_job_path(job_id: job.uuid), class: 'btn btn-primary' %>
+              <%= link_to 'View job', job, class: 'btn btn-primary' %>
+
+              <% if user_signed_in? && current_user.job_seeker? %>
+                <% if  current_user.jobs.include?(job) %>
+                  <%= link_to 'Unfavourite', "javascript_void(0)", class: 'btn btn-danger', data: { turbo_method: :post }  %>
+                <% else %>
+                  <%= link_to 'Favourite', user_saved_jobs_path(job_id: job.uuid), class: 'btn btn-outline-danger', data: { turbo_method: :post } %>
+                <% end %>
+              <% end %>  
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
-<% else %>
-  <h1 class="text-center">Sorry! No <%= "#{(params[:type] || '').titleize} Jobs" %> at the moment</h1>
-<% end %>
+</div>

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'settings' => 'notification_settings#manage_notification_settings'
+  resources :notification_settings, only: %i[create update]
+
   namespace :company do 
     resources :jobs
     resources :applied_jobs

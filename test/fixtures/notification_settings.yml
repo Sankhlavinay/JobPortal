@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  on_new_job_post: false
+  on_removal_of_favourite_job: false
+  on_removal_of_existing_job: false
+  on_status_changed_on_applied: false
+  on_job_status_changed: false
+
+two:
+  on_new_job_post: false
+  on_removal_of_favourite_job: false
+  on_removal_of_existing_job: false
+  on_status_changed_on_applied: false
+  on_job_status_changed: false

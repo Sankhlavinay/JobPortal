@@ -6,21 +6,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/companies">Companies</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/jobs?type=remote">Remote Jobs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/jobs?type=onsite">Onsite Jobs</a>
-          </li>
-        </ul>
-
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/companies">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/jobs?type=remote">Remote Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/jobs?type=onsite">Onsite Jobs</a>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Signout', destroy_user_session_path, class: "nav-link active", 
+            <% if current_user.job_seeker? %>
+              <%= link_to 'Saved Job', my_saved_jobs_user_saved_jobs_path, class: "nav-link active" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Signout', destroy_user_session_path, class: "nav-link active",
             method: :delete, data: { confirm: "Are You Sure, You want to logout?" } %>
           </li>
         <% else %>

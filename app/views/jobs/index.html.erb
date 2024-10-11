@@ -62,7 +62,7 @@
 
               <% if user_signed_in? && current_user.job_seeker? %>
                 <% if  current_user.jobs.include?(job) %>
-                  <%= link_to 'Unfavourite', "javascript_void(0)", class: 'btn btn-danger', data: { turbo_method: :post }  %>
+                <span class="badge text-bg-primary">Saved Job</span>
                 <% else %>
                   <%= link_to 'Favourite', user_saved_jobs_path(job_id: job.uuid), class: 'btn btn-outline-danger', data: { turbo_method: :post } %>
                 <% end %>
